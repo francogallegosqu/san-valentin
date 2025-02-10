@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sacramento">
+    <style>
+        #card {
+  height: 500px;
+  width: 800px;
+  margin: 5em auto;
+  position: fixed;
+  top: -15px;
+  left: 25%;
+  display: flex;
+  visibility: hidden;
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 600px) {
+  #card {
+    width: 90%; /* Reducir el ancho para dispositivos móviles */
+    height: auto; /* Permitir que la altura se ajuste automáticamente */
+    margin: 2em auto; /* Ajustar el margen */
+    position: static; /* Cambiar la posición a estática para que no sea fija */
+    visibility: none; /* Hacer que el elemento sea visible */
+    top: 50px;
+  }
+
+  .side.side.one {
+    display: none;
+  }
+
+  #card p {
+    padding-left: 0 !important; /* Eliminar el relleno a la izquierda en dispositivos móviles */
+    padding-right: 0 !important; /* Eliminar el relleno a la derecha en dispositivos móviles */
+    font-size: 1em !important;
+  }
+
+  .valentines-day {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+#card h3 {
+  font-size: 2em;
+  margin: 0;
+  color: pink;
+  text-align: center;
+}
+
+#card p {
+  font-size: 1.2em;
+  text-align: justify;
+  padding-left: 30px; /* Espacio en blanco a la izquierda */
+  padding-right: 30px; /* Espacio en blanco a la derecha */
+}
+
+.side {
+  background: #eee;
+  height: 550px;
+  width: 400px;
+  padding: 10px;
+}
+
+.side.one {
+  width: 320px;
+  transform: skew(10deg, 20deg);
+  background: linear-gradient(90deg, #fff, #fff 40%, #ddd);
+  display: flex; /* Utiliza flexbox para centrar el corazón verticalmente */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  transform: skew(10deg, 20deg);
+  position: relative;
+  overflow: hidden;
+}
+
+.side.two {
+  transform: skew(10deg, -15deg);
+  background: linear-gradient(-90deg, #fff, #fff 40%, #f0f0f0);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: "Sacramento", cursive;
+  background-color: #f1e3d3;
+  overflow: hidden;
+}
+
+.valentines-day {
+  position: relative;
+  cursor: pointer;
+}
+
+.envelope {
+  position: relative;
+  filter: drop-shadow(0 0 25px rgba(0, 0, 0, 0.3));
+}
+
+.envelope:before {
+  content: "";
+  position: absolute;
+  width: 254px;
+  height: 254px;
+  background-color: #ff9494;
+  transform: rotate(-45deg);
+  border-radius: 0 15px 0 0;
+  left: -37px;
+  top: -82px;
+}
+
+.envelope:after {
+  content: "";
+  position: absolute;
+  background-color: #ff9494;
+  width: 360px;
+  height: 225px;
+  left: -90px;
+  top: 45px;
+}
+
+.heart {
+  position: relative;
+  background-color: #e01911;
+  display: inline-block;
+  height: 180px;
+  top: 50px;
+  left: 0;
+  transform: rotate(-45deg);
+  width: 180px;
+  filter: drop-shadow(0 -10px 25px rgba(0, 0, 0, 0.3));
+  transition: 0.5s;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: #e01911;
+  border-radius: 50%;
+  height: 180px;
+  width: 180px;
+  position: absolute;
+}
+
+.heart:before {
+  top: -100px;
+  left: 0;
+}
+
+.heart:after {
+  left: 100px;
+  top: 0;
+}
+
+.front {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 190px solid #fbd2d2;
+  border-top: 113px solid transparent;
+  border-bottom: 113px solid transparent;
+  top: 44px;
+  left: 80px;
+  z-index: 4;
+}
+
+.front:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 190px solid #fbd2d2;
+  border-top: 113px solid transparent;
+  border-bottom: 113px solid transparent;
+  top: -113px;
+  left: -170px;
+}
+
+.front:after {
+  width: 0;
+  height: 0;
+  position: absolute;
+  content: "";
+  border-bottom: 150px solid #fce7e9;
+  border-right: 180px solid transparent;
+  border-left: 180px solid transparent;
+  top: -36px;
+  left: -170px;
+}
+
+.text {
+  position: absolute;
+  font-family: arial;
+  letter-spacing: 3.5px;
+  text-align: center;
+  color: white;
+  z-index: 2;
+  top: 80px;
+  left: 15px;
+  transition: 0.5s;
+}
+
+.valentines-day:hover .heart {
+  transform: translateY(-50px) rotate(-45deg);
+}
+
+.valentines-day:hover .text {
+  transform: translateY(-50px);
+}
+
+.side.one .fa-heart {
+  font-size: 8em;
+  color: red;
+  animation: pulseHeart 1s ease-in-out infinite alternate;
+  cursor: default;
+}
+
+@keyframes pulseHeart {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+/* Estilos para dispositivos móviles */
+@media screen and (max-width: 600px) {
+  #card {
+    width: 90%;
+    max-width: 90%;
+    margin: 2em auto;
+  }
+
+  .side {
+    width: 90%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .text {
+    font-size: 1em; /* Ajuste del tamaño de fuente */
+  }
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>❤️Feliz San Valentín Mi Amorcito</title>
+</head>
+
+<body>
+    <div class="valentines-day">
+        <div class="envelope"></div>
+        <div class="heart"></div>
+        <div class="text">¡FELIZ DÍA DE<br>SAN VALENTÍN!</div>
+        <div class="front"></div>
+    </div>
+
+    <div id="card">
+        <div class="side one">
+            <i class="fas fa-heart"></i>
+        </div>
+        <div class="side two">
+            <h3>🌷🌷🌷</h3>
+            <p>Querida Fabiola,</p>
+            <p>
+                En este San Valentín, quiero recordarte lo especial que eres. Cada sonrisa compartida, cada momento
+                juntos es un tesoro guardado en mi corazón. Eres una persona maravillosa, tanto por dentro como por fuera y estoy agradecido de tenerte en mi vida. Por eso quiero decirte que valorare cada instante
+                compartido para asi recordar momentos de felicidad contigo por siempre. Gracias por ser quien eres, y por eso hoy quiero decirte que seas mi san valentin ❤️
+            </p>
+            <p>
+                ¡Feliz San Valentín Mi Amorcito!
+            </p>
+            <p>
+                "Con cariño de tu amorcito que te quiere y ama,<br>
+                Franco Gallegos"
+            </p>
+        </div>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script>
+        $(document).ready(function () {
+    // Al cargar la página, ocultamos las cortinas
+    $('.left-curtain').css('width', '0%');
+    $('.right-curtain').css('width', '0%');
+
+    $('.valentines-day').click(function () {
+        // Animación de desvanecimiento de los elementos del sobre
+        $('.envelope').css({ 'animation': 'fall 3s linear 1', '-webkit-animation': 'fall 3s linear 1' });
+        $('.envelope').fadeOut(800, function () {
+            // Ocultar elementos dentro de .valentines-day
+            $('.valentines-day .heart, .valentines-day .text, .valentines-day .front').hide();
+
+            // Hacer visible la carta con una animación ondulante
+            $('#card').css({ 'visibility': 'visible', 'opacity': 0, 'transform': 'scale(0.1)' });
+            $('#card').animate({ 'opacity': 1 }, {
+                duration: 1000, step: function (now, fx) {
+                    var scale = 1 + Math.sin(now * Math.PI) * 0.1; // Calculamos la escala basada en la función seno
+                    $(this).css('transform', 'scale(' + scale + ')');
+                }
+            }); // Animación de ondulación
+        });
+    });
+}); 
+    </script>
+</body>
+
+</html>
